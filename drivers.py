@@ -20,8 +20,8 @@ BROWSER_NAME: str = 'CHROME'
 
 QUIT_BROWSER: bool = True
 QUIT_BROWSER: bool = False
-EXP_TIME: int = 240
-WAIT_TIME: int = 45
+EXP_TIME: int = 1800
+WAIT_TIME: int = 1800
 
 
 

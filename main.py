@@ -25,16 +25,30 @@ FB_URL : str = "https://www.sbtet.telangana.gov.in/API/api/PreExamination/Genera
 FB_PIN_URL : str = "https://www.sbtet.telangana.gov.in/API/api/PreExamination/getFacultyData?FeedbackId=3&Otp=5E5214&Pin=21087-EC-059"
 def main()-> None:
     sb_fdback = init_driver()
-    print(TEST_URL)
-    sb_fdback.get(TEST_URL)
-    box = sb_fdback.wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="feedbackcontainer"]/form/div[3]/table/tbody')))
-    #stars = box.find_element_by_css_selector("[title^='Excellent']")
-    #rating = box.find_elements(by=By.CLASS_NAME, value='rating')
-    stars = box.find_elements(by=By.CSS_SELECTOR, value="[title^='Excellent']")
-    #stars = box.wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, value="[title^='Excellent']"))
-    for star in stars:
-        star.click()
-    sleep(10)
+    sb_fdback.get(URL)
+    while(True):
+        box = sb_fdback.wait.until(EC.alert_is_present())
+        box = sb_fdback.switch_to.alert
+        print(box.text)
+        box.accept()
+        box = sb_fdback.wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="feedbackcontainer"]/form/div[3]/table/tbody')))
+        #stars = box.find_element_by_css_selector("[title^='Excellent']")
+        #rating = box.find_elements(by=By.CLASS_NAME, value='rating')
+        sleep(10)
+        sub = sb_fdback.wait.until(EC.presence_of_element_located((By.XPATH, '/html/body/div[1]/ui-view/div/div[2]/ui-view/div[1]/div[1]/form/div[5]/button')))
+        stars = box.find_elements(by=By.CSS_SELECTOR, value="[title^='Excellent']")
+        print("found stars")
+        #stars = box.wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, value="[title^='Excellent']"))
+        for star in stars:
+            print("clicking satrs")
+            star.click()
+        print("Clik sumbit")
+        #sub.click()
+        box = sb_fdback.wait.until(EC.alert_is_present())
+        box = sb_fdback.switch_to.alert
+        print(box.text)
+        box.accept()
+        sleep(10)
     
     
 if __name__ == "__main__":
