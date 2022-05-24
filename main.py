@@ -30,9 +30,10 @@ def main()-> None:
         box = sb_fdback.wait.until(EC.alert_is_present())
         box = sb_fdback.switch_to.alert
         print(box.text)
-        sleep(15)
+        sleep(7)
         box.accept()
         sleep(15)
+        sub = sb_fdback.wait.until(EC.presence_of_element_located((By.XPATH, '/html/body/div[1]/ui-view/div/div[2]/ui-view/div[1]/div[1]/form/div[3]/table/tbody/tr[12]/td[2]')))
         sub = sb_fdback.wait.until(EC.presence_of_element_located((By.XPATH, '/html/body/div[1]/ui-view/div/div[2]/ui-view/div[1]/div[1]/form/div[5]/button')))
         box = sb_fdback.wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="feedbackcontainer"]/form/div[3]/table/tbody')))
         #stars = box.find_element_by_css_selector("[title^='Excellent']")
@@ -50,7 +51,7 @@ def main()-> None:
         box = sb_fdback.switch_to.alert
         print(box.text)
         box.accept()
-        sleep(10)
+        sleep(5)
     
     
 if __name__ == "__main__":
