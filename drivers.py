@@ -7,7 +7,9 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 #from selenium.common.exceptions import TimeoutException
 #from selenium.webdriver.support.ui import Select
+#from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.ui import Select
 import os
 import configparser
 from time import sleep
@@ -39,7 +41,7 @@ def init_driver():
                 #chrome_profile.add_argument(f"user-data-dir={FILE_PATH}\\User_Data")
                 chrome_profile.add_argument("--log-level=3")
                 print(f'Opening {BROWSER_NAME} Browser........')
-                driver = webdriver.Chrome(service =Service(),options=chrome_profile)
+                driver = webdriver.Chrome(service=Service(), options=chrome_profile)
         
                 
                 driver.wait = WebDriverWait(driver, EXP_TIME)

@@ -10,12 +10,15 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 #from selenium.common.exceptions import TimeoutException
 #from selenium.webdriver.support.ui import Select
+#from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.ui import Select
+from selenium.webdriver.common.keys import Keys
 import os
 import configparser
 from time import sleep
 
-
+PIN = '22087-EC-0'
 
 
 TEST_URL: str = f"file://{FILE_PATH}/myurl.html"
@@ -28,10 +31,24 @@ def main()-> None:
     sb_fdback = init_driver()
     sb_fdback.get(URL)
     while(True):
+        box = sb_fdback.wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="feedbackcontainer"]/div[1]/div/div/div[1]/div/select')))
+        box = sb_fdback.wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="feedbackcontainer"]/div[1]/div/div/div[2]/div/input')))
+        sleep(2)
+        box = sb_fdback.wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="feedbackcontainer"]/div[1]/div/div/div[1]/div/select')))
+        box.send_keys( Keys.ARROW_DOWN)
+        mySelect = Select(box)
+
+       # mySelect.send_keys( Keys.ARROW_DOWN)
+
+        box = sb_fdback.wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="feedbackcontainer"]/div[1]/div/div/div[2]/div/input')))
+        
+        box.clear()
+        box.send_keys(f"{PIN}")
+
         box = sb_fdback.wait.until(EC.alert_is_present())
         box = sb_fdback.switch_to.alert
         print(box.text)
-        sleep(7)
+        #sleep(7)
         box.accept()
         sleep(15)
         sub = sb_fdback.wait.until(EC.presence_of_element_located((By.XPATH, '/html/body/div[1]/ui-view/div/div[2]/ui-view/div[1]/div[1]/form/div[3]/table/tbody/tr[12]/td[2]')))
